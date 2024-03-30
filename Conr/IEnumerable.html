@@ -1,0 +1,36 @@
+﻿
+@model IEnumerable<Task>
+
+<h1>Список задач</h1>
+
+<ul>
+@foreach (var task in Model)
+{
+    <li>
+        <a asp-action="Details" asp-route-id="@task.Id">@task.Title</a>
+    </li>
+}
+</ul>
+
+<form asp-action="AddTask" method="post">
+    <label asp-for="Title"></label>
+    <input asp-for="Title">
+
+    <label asp-for="Description"></label>
+    <input asp-for="Description">
+
+    <input type="submit" value="Добавить задачу">
+</form>
+<h1>Подробная информация о задаче</h1>
+
+<ul>
+    <li>Заголовок: @Model.Title</li>
+    <li>Описание: @Model.Description</li>
+    <li>Статус: @Model.Done</li>
+    <li>Дата создания: @Model.CreatedAt</li>
+    <li>Дата выполнения: @Model.CompletedAt</li>
+    <li>Приоритет: @Model.Priority</li>
+</ul>
+
+<a asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a> |
+<a asp-action="Delete" asp-route-id="@Model.Id">Удалить</a>
